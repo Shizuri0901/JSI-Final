@@ -2,11 +2,11 @@
         <header id="E_navBar">
             <div id="navLeft">
                 <img src="" alt="" id="img_logo">
-                <button id="B_home">Trang Chủ</button>
+                <button id="B_home" class="navText">Trang Chủ</button>
             </div>
             <div id="navRight">
-                <button id="B_signIn/Up">Đăng kí / Đăng Nhập</button>
-                <button id="B_aboutUs">Về chúng tôi</button>
+                <button id="B_signIn/Up" class="navText">Đăng kí / Đăng Nhập</button>
+                <button id="B_aboutUs" class="navText">Về chúng tôi</button>
             </div>
         </header>
         <div id="E_bookingAndCarousel">
