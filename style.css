@@ -95,10 +95,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+#E_bookingAndCarousel {
+  position: relative;
+}
 #carousel {
   position: relative;
 }
-
 .overlay {
   position: absolute;
   top: 0;
@@ -113,23 +115,27 @@ button:focus-visible {
 #P_home {
   margin: 0px;
   padding: 0px;
+  width: 100%;
+  height: 100%;
 }
 #E_navBar {
   width: 100%;
-  height: 100%;
   background: #FF6F61;
+  display: flex;
 }
 #img_logo {
   border-radius: 61px;
   background: #2306D6;
-  width: 61px;
-  height: 61px;
+  width: 31px;
+  height: 31px;
   flex-shrink: 0;
 }
 .navText {
   color: #06D6A0;
   text-align: center;
-  font-size: 32px;
+  font-size: 12px;
   font-family: Inter;
   font-weight: 300;
+  background-color: transparent;
+  font-weight: bold;
 }
