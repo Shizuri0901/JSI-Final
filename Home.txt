@@ -2,11 +2,11 @@
       <div id="E_navBar">
           <div id="navLeft">
               <img src="" alt="" id="img_logo">
-              <button id="B_home" class="navText">Trang Chủ</button>
+              <button id="B_home" class="navText" onclick="Home()">Trang Chủ</button>
           </div>
           <div id="navRight">
-              <button id="B_signIn/Up" class="navText">Đăng kí / Đăng Nhập</button>
-              <button id="B_aboutUs" class="navText">Về chúng tôi</button>
+              <button id="B_signIn/Up" class="navText" onclick="Sign()">Đăng kí / Đăng Nhập</button>
+              <button id="B_aboutUs" class="navText" onclick="AboutUs()">Về chúng tôi</button>
           </div>
       </div>
       <div id="E_bookingAndCarousel">
@@ -57,7 +57,7 @@
                       </ul>
                     </div>
               </div>
-              <button id="B_search" onclick="">TÌM NGAY</button>
+              <button class="B_search" onclick="">TÌM NGAY</button>
               </div>
         </div>
       </div>
