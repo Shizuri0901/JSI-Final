@@ -1,8 +1,3 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-
-
 /// Setup dropdown
 
 // Get dropdown toggle buttons and dropdown menus
@@ -56,13 +51,13 @@ if(dropdownToggle1 != null){
     }
   });}
 
-export let Home = () => {
-  document.querySelector(".all").value = `<div id="E_navBar">
+document.querySelector("#B_home").addEventListener('click',() => {
+  document.querySelector(".all").innerHTML = `<div id="E_navBar">
   <div id="P_home" class="all">
       <div id="E_navBar">
           <div id="navLeft">
               <img src="" alt="" id="img_logo">
-              <button id="B_home" class="navText" onclick="Home()">Trang Chủ</button>
+              <button id="B_home" class="navText">Trang Chủ</button>
           </div>
           <div id="navRight">
               <button id="B_signIn/Up" class="navText" onclick="Sign()">Đăng kí / Đăng Nhập</button>
@@ -158,7 +153,4 @@ export let Home = () => {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`
-}
-export let Sign = () => {
-  document.querySelector(".all").value = ``
-}
+})
