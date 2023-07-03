@@ -1,103 +1,27 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+::-webkit-scrollbar {
+  width: 0px; /* Adjust the width as needed */
+  background-color: transparent;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
-a:hover {
-  color: #535bf2;
+* {
+  background: transparent;
 }
-
 body {
-  margin: 0;
-  display: flex;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  background-image: url('./body_bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+  scroll-behavior: smooth;
 }
 #E_bookingAndCarousel {
   position: relative;
 }
 #carousel {
   position: relative;
+  opacity: 50%;
 }
 .overlay {
   position: absolute;
@@ -122,9 +46,13 @@ button:focus-visible {
 }
 #E_navBar {
   width: 100%;
-  background: #FF6F61;
+  background-image: url('./nav_bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: space-between;
+  height: 50px;
+  align-items: center;
 }
 #img_logo {
   border-radius: 61px;
@@ -134,17 +62,19 @@ button:focus-visible {
   flex-shrink: 0;
 }
 .navText {
-  color: #06D6A0;
-  text-align: center;
-  font-size: 12px;
-  font-family: Inter;
-  font-weight: 300;
+  border: transparent 0px;
   background-color: transparent;
-  font-weight: bold;
+  color: #008080;
+  text-align: center;
+  font-size: 20px;
+  font-family: Sansita Swashed;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 .title {
   margin-bottom: 40px;
-  color: #FF6F61;
+  color: #008080;
   text-align: center;
   font-size: 50px;
   font-family: Lobster;
@@ -160,7 +90,8 @@ button:focus-visible {
   margin-left: 30px;
 }
 .box {
-  background-color: #008080;
+  border-radius: 180px;
+  background: #FFFB9E;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -168,10 +99,9 @@ button:focus-visible {
   width: 200px;
   height: 100px;
   flex-shrink: 0;
-  border-radius: 10px;
 }
 .label {
-  color: #FFD166;
+  color: #702929;
   text-align: center;
   font-size: 20px;
   font-family: Lobster;
@@ -183,12 +113,13 @@ button:focus-visible {
   justify-content: space-around;
 }
 .B_search {
-  color: #06D6A0;
+  color: #FFD166;
+  border-radius: 20px;
   text-align: center;
   font-size: 20px;
   font-family: Lobster;
   font-weight: bold;
-  background: #FF7F50;
+  background: #008080;
 }
 #E_popular {
   display: flex;
@@ -198,7 +129,6 @@ button:focus-visible {
 }
 .popu-box {
   display: flex;
-  background-color: #D9D9D9;
 }
 .popu-image{
   width: 300px;
@@ -216,7 +146,9 @@ button:focus-visible {
   margin-top: 30px;
 }
 #E_footer {
-  background-color: #D9D9D9;
+  background-image: url('./nav_bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 177px;
   margin-top: 50px;
 }
@@ -256,7 +188,7 @@ button:focus-visible {
   align-items: center;
 }
 .control {
-  color: #FF6F61;
+  color: #008080;
   text-align: center;
   font-size: 40px;
   font-family: Lobster;
