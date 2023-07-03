@@ -1,97 +1,223 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+::-webkit-scrollbar {
+  width: 0px; /* Adjust the width as needed */
+  background-color: transparent;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
-a:hover {
-  color: #535bf2;
+* {
+  background: transparent;
 }
-
 body {
-  margin: 0;
+  background-image: url('./body_bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+#E_bookingAndCarousel {
+  position: relative;
+}
+#carousel {
+  position: relative;
+  opacity: 50%;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#P_home {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
 }
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+#E_navBar {
+  width: 100%;
+  background-image: url('./nav_bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+}
+#img_logo {
+  border-radius: 61px;
+  background: #2306D6;
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+}
+.navText {
+  border: transparent 0px;
+  background-color: transparent;
+  color: #008080;
   text-align: center;
+  font-size: 20px;
+  font-family: Sansita Swashed;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.title {
+  margin-bottom: 40px;
+  color: #008080;
+  text-align: center;
+  font-size: 50px;
+  font-family: Lobster;
+  font-weight: bold;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.w-100 {
+  height: 400px
 }
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+#navRight {
+  margin-right: 30px;
 }
-
-.card {
-  padding: 2em;
+#navLeft {
+  margin-left: 30px;
 }
-
-.read-the-docs {
-  color: #888;
+.box {
+  border-radius: 180px;
+  background: #FFFB9E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 100px;
+  flex-shrink: 0;
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.label {
+  color: #702929;
+  text-align: center;
+  font-size: 20px;
+  font-family: Lobster;
+  margin: 0px;
 }
-button:hover {
-  border-color: #646cff;
+#search {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.B_search {
+  color: #FFD166;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-family: Lobster;
+  font-weight: bold;
+  background: #008080;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#E_popular {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin-top: 30px;
+}
+.popu-box {
+  display: flex;
+}
+.popu-image{
+  width: 300px;
+  height: 250px;
+}
+.popu-label {
+  color: #000;
+  font-size: 15px;
+  font-family: Lobster;
+  font-style: normal;
+  font-weight: 400;
+  /* line-height: normal; */
+}
+.popu-info {
+  margin-top: 30px;
+}
+#E_footer {
+  background-image: url('./nav_bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 177px;
+  margin-top: 50px;
+}
+#footerTitle {
+  color: #000;
+  text-align: center;
+  font-size: 36px;
+  font-family: Lobster;
+  font-style: normal;
+  font-weight: 400px;
+  line-height: normal;
+}
+#footerDown {
+  display: flex;
+  justify-content: space-between;
+}
+.contact {
+  margin-left: 50px;
+  font-size: 20px;
+}
+#footerRight{
+  line-height: 1.1em;
+}
+.credit {
+  margin-right: 20px;
+  font-size: 20px;
+}
+#members {
+  margin-right: 50px;
+}
+#P_signIn {
+  width: 100%;
+}
+#E_signIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.control {
+  color: #008080;
+  text-align: center;
+  font-size: 40px;
+  font-family: Lobster;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: transparent;
+}
+#Input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.indi {
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+#Option {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+#B_confirm {
+  margin-top: 10px;
+  margin-left: 175px;
+}
+.Inp {
+  border-radius: 20px;
+  background: #D9D9D9;
+  width: 483px;
+  height: 62px;
 }
