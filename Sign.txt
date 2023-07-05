@@ -1,7 +1,7 @@
-<div id="P_signIn">
+<div id="P_signIn" class="copy">
       <div id="E_navBar">
           <div id="navLeft">
-              <img src="" alt="" id="img_logo">
+              <img src="./Logo.png" alt="" id="img_logo">
               <button id="B_home" class="navText">Trang Chủ</button>
           </div>
           <div id="navRight">
