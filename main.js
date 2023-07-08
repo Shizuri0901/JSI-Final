@@ -1,6 +1,6 @@
 /// Other constiable
-import { getData, getData2 } from "./FB";
-const In = false;
+import { getData, getData2, } from "./FB";
+let In = false;
 localStorage.setItem('page', "home");
 /// Handle SPA
 document.querySelector("#B_home").addEventListener('click', async () => { // Nút trang chủ
@@ -73,6 +73,7 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
           <p class="popu-label"></p>
           <p class="popu-label"></p>
         </div>
+        ${getData3}
       </div>
     </div>
     <div id="E_footer">
@@ -222,14 +223,14 @@ document.querySelector("#B_signInUp").addEventListener('click',() => { // Nút �
   /// Set up sign in và sign up
   if(In == false){
     document.querySelector("#InOption").addEventListener("click",() => {
-      document.querySelector("#Input").replace(`<p class="popu-label indi">Xác nhận mật khẩu</p>
+      document.querySelector("#Input").value.replace(`<p class="popu-label indi">Xác nhận mật khẩu</p>
         <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">`,``)})
       In = true;
       document.querySelector("#InOption").setAttribute("color","#FF6F61")
     }
   else if(In == true){
     document.querySelector("OnOption").addEventListener("click",() => {
-      document.querySelector("#Input").replace(`<p class="popu-label indi">Email</p>
+      document.querySelector("#Input").value.replace(`<p class="popu-label indi">Email</p>
       <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
       <p class="popu-label indi">Số điện thoại</p>
       <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
