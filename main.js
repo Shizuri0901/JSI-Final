@@ -1,11 +1,14 @@
 /// Setup dropdown
-
+import { getData, getData2 } from "./FB.js";
 // Get dropdown toggle buttons and dropdown menus
 var dropdownToggle1 = document.querySelector('#dropdown-toggle-1');
 var dropdownToggle2 = document.querySelector('#dropdown-toggle-2');
 var dropdownMenu1 = document.querySelector('#dropdown-menu-1');
 var dropdownMenu2 = document.querySelector('#dropdown-menu-2');
 
+
+dropdownMenu1.innerHTML = await getData();
+dropdownMenu2.innerHTML = await getData2();
 // Variables to store selected values
 var selectedOption1 = '';
 var selectedOption2 = '';

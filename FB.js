@@ -1,5 +1,5 @@
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 // Required for side-effects
 import "firebase/firestore";
@@ -27,7 +27,43 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const analytics = getAnalytics(app);
 
+export let getData = async () => {
+  let all = ``
+  const querySnapshot = await getDocs(collection(db, "Trip-info"));
+  querySnapshot.forEach((doc) => {
+    all += `<li><a class="dropdown-item" href="#">${doc.id}</a></li>`
+
+  });
+  return all
+}
+
+export let getData2 = async () => {
+  let all = ``
+  const snap = await getDoc(doc(db, "Trip-info","An Giang"))
+  console.log(snap);
+  // const querySnapshot = await getDocs(collection(db, "Trip-info","An Giang"));
+  // console.log(querySnapshot);
+  // querySnapshot.forEach((doc) => {
+  //   console.log(doc.id, " => ", doc.data());
+  //   doc.data()['end'].forEach((d) => {
+    
+  //     all += `<li><a class="dropdown-item" href="#">${d.name}</a></li>`
+      
+  //   })
+  // })
+  // return all
+     
+}
+
+
+
 const querySnapshot = await getDocs(collection(db, "Trip-info"));
 querySnapshot.forEach((doc) => {
     console.log(doc.id, " => ", doc.data());
+    // let dropdownMenu1 = document.getElementById('dropdown-menu-1');
+
+    // doc.data()['end'].forEach((d) => {
+      
+      
+    // })
 });
