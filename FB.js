@@ -1,5 +1,5 @@
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc  } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 // Required for side-effects
 import "firebase/firestore";
@@ -26,6 +26,16 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app)
 const analytics = getAnalytics(app);
+
+export let getData = async () => {
+  let all = ``
+  const querySnapshot = await getDocs(collection(db, "Trip-info"));
+  querySnapshot.forEach((doc) => {
+    all += `<li><a class="dropdown-item" href="#">${doc.id}</a></li>`
+
+  });
+  return all
+}
 
 const querySnapshot = await getDocs(collection(db, "Trip-info"));
 querySnapshot.forEach((doc) => {

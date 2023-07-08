@@ -1,8 +1,9 @@
 /// Other variable
+import { getData } from "./FB";
 const In = false;
 localStorage.setItem('page', "home");
 /// Handle SPA
-document.querySelector("#B_home").addEventListener('click',() => { // Nút trang chủ
+document.querySelector("#B_home").addEventListener('click',async () => { // Nút trang chủ
   document.querySelector(".all").innerHTML = `
   <div id="P_home" class="copy">
     <div id="E_navBar">
@@ -107,6 +108,9 @@ document.querySelector("#B_home").addEventListener('click',() => { // Nút trang
     var dropdownToggle2 = document.querySelector('#dropdown-toggle-2');
     var dropdownMenu1 = document.querySelector('#dropdown-menu-1');
     var dropdownMenu2 = document.querySelector('#dropdown-menu-2');
+
+
+    dropdownMenu1.innerHTML = await getData();
 
   // Variables to store selected values
     var selectedOption1 = '';
