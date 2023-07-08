@@ -54,3 +54,29 @@ export let getData2 = async (start_point) => {
   }
   return all
 }
+// 3 chuyen pho bien
+export let getPopularTrip = async (start_point="An Giang") => {
+  let all = `<h2 class="title">Một số tuyến phổ biến</h2>`
+  const docRef = doc(db, "Trip-info", start_point);
+  const docSnap = await getDoc(docRef);
+  console.log(docSnap.data())
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    docSnap.data()['end'].forEach((end_point) => {
+      all += `<div class="popu_box">
+      <img src="${end_point.vehicle-image}" alt="" class="popu_image">
+      <div class="popu_info">
+        <p class="popu-label">Điểm đi:${start_point}</p>
+        <p class="popu-label">Điểm đến:${end_point.name}</p>
+        <p class="popu-label">Giá tiền:${end_point.price}</p>
+        <p class="popu-label">Thời gian di chuyển:${end_point.time}</p>
+      </div>
+    </div>`
+    })
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return all
+}
