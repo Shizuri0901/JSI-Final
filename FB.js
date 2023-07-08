@@ -36,8 +36,3 @@ export let getData = async () => {
   });
   return all
 }
-
-const querySnapshot = await getDocs(collection(db, "Trip-info"));
-querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-});

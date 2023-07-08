@@ -1,5 +1,5 @@
 /// Other constiable
-import { getData } from "./FB";
+import { getData, getData2 } from "./FB";
 const In = false;
 localStorage.setItem('page', "home");
 /// Handle SPA
@@ -137,7 +137,7 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
         });
 
     // Handle click on dropdown menu 1 items
-    dropdownMenu1.addEventListener('click', function(event) {
+    dropdownMenu1.addEventListener('click', async function(event) {
         let target = event.target;
         if (target.classList.contains('dropdown-item')) {
             selectedOption1 = target.textContent;
