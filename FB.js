@@ -36,3 +36,21 @@ export let getData = async () => {
   });
   return all
 }
+
+export let getData2 = async (start_point) => {
+  let all = ``
+  const docRef = doc(db, "Trip-info", start_point);
+  const docSnap = await getDoc(docRef);
+  console.log(docSnap.data())
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    docSnap.data()['end'].forEach((end_point) => {
+      all += `<li><a class="dropdown-item" href="#">${end_point.name}</a></li>`
+    })
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return all
+}
