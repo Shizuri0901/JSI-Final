@@ -1,5 +1,5 @@
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc  } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 // Required for side-effects
 import "firebase/firestore";
@@ -27,7 +27,56 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const analytics = getAnalytics(app);
 
-const querySnapshot = await getDocs(collection(db, "Trip-info"));
-querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-});
+export let getData = async () => {
+  let all = ``
+  const querySnapshot = await getDocs(collection(db, "Trip-info"));
+  querySnapshot.forEach((doc) => {
+    all += `<li><a class="dropdown-item" href="#">${doc.id}</a></li>`
+
+  });
+  return all
+}
+
+export let getData2 = async (start_point) => {
+  let all = ``
+  const docRef = doc(db, "Trip-info", start_point);
+  const docSnap = await getDoc(docRef);
+  console.log(docSnap.data())
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    docSnap.data()['end'].forEach((end_point) => {
+      all += `<li><a class="dropdown-item" href="#">${end_point.name}</a></li>`
+    })
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return all
+}
+// 3 chuyen pho bien
+export let getPopularTrip = async (start_point="An Giang") => {
+  let all = `<h2 class="title">Một số tuyến phổ biến</h2>`
+  const docRef = doc(db, "Trip-info", start_point);
+  const docSnap = await getDoc(docRef);
+  console.log(docSnap.data())
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    docSnap.data()['end'].forEach((end_point) => {
+      all += `<div class="popu_box">
+      <img src="${end_point.vehicle-image}" alt="" class="popu_image">
+      <div class="popu_info">
+        <p class="popu-label">Điểm đi:${start_point}</p>
+        <p class="popu-label">Điểm đến:${end_point.name}</p>
+        <p class="popu-label">Giá tiền:${end_point.price}</p>
+        <p class="popu-label">Thời gian di chuyển:${end_point.time}</p>
+      </div>
+    </div>`
+    })
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return all
+}

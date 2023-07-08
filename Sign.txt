@@ -1,48 +1,50 @@
 <div id="P_signIn" class="copy">
-      <div id="E_navBar">
-          <div id="navLeft">
-              <img src="./Logo.png" alt="" id="img_logo">
-              <button id="B_home" class="navText">Trang Chủ</button>
-          </div>
-          <div id="navRight">
-              <button id="B_signIn/Up" class="navText">Đăng kí / Đăng Nhập</button>
-              <button id="B_aboutUs" class="navText">Về chúng tôi</button>
-          </div>
-      </div>
-      <div id="E_signIn">
-        <div id="Option">
-          <button type="button" id="UpOption" class="control" title="Up">Đăng Kí</button>
-          <button type="button" id="InOption" class="control" title="In">Đăng Nhập</button>
+    <div id="E_navBar">
+        <div id="navLeft">
+            <img src="./Logo.png" alt="" id="img_logo">
+            <button id="B_home" class="navText">Trang Chủ</button>
         </div>
-        <div id="Input">
-          <p class="popu-label indi">Số điện thoại</p>
-          <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Phone number">
-          <p class="popu-label indi">Mật khẩu</p>
-          <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
-          <p class="popu-label indi">Xác nhận mật khẩu</p>
-          <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Password Confirm">
-          <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>
+        <div id="navRight">
+            <button id="B_signIn/Up" class="navText">Đăng kí / Đăng Nhập</button>
+            <button id="B_aboutUs" class="navText">Về chúng tôi</button>
         </div>
+    </div>
+    <div id="E_signIn">
+      <div id="Option">
+        <button type="button" id="UpOption" class="control" title="Up">Đăng Kí</button>
+        <button type="button" id="InOption" class="control" title="In">Đăng Nhập</button>
       </div>
-      <div id="E_footer">
-          <h2 id="footerTitle">THÔNG TIN LIÊN HỆ</h2>
-          <div id="footerDown">
-              <div id="footerLeft">
-              <p class="popu-label contact">Số điện thoại: 0916134916</p>
-              <p class="popu-label contact">Email liên hệ : vumhuy0901@gmail.com</p>
-              <p class="popu-label contact">Facebook <a href="https://www.facebook.com/profile.php?id=100034575303112">Huy Vũ</a></p>
-              </div>
-              <div id="footerRight">
-              <p class="popu-label credit">Nhóm: Mid travel</p>
-              <p class="popu-label credit">Thành viên:</p>
-              <ul id="members">
-                  <li class="popu-label credit">Vũ Mạnh Huy</li>
-                  <li class="popu-label credit">Nguyễn Lư Đức Nghĩa</li>
-                  <li class="popu-label credit">Nguyễn Long</li>
-              </ul>
-              </div>
-          </div>
+      <div id="Input">
+        <p class="popu-label indi">Email</p>
+        <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
+        <p class="popu-label indi">Số điện thoại</p>
+        <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
+        <p class="popu-label indi">Mật khẩu</p>
+        <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+        <p class="popu-label indi">Xác nhận mật khẩu</p>
+        <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
+        <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>
       </div>
+    </div>
+    <div id="E_footer">
+        <h2 id="footerTitle">THÔNG TIN LIÊN HỆ</h2>
+        <div id="footerDown">
+            <div id="footerLeft">
+            <p class="popu-label contact">Số điện thoại: 0916134916</p>
+            <p class="popu-label contact">Email liên hệ : vumhuy0901@gmail.com</p>
+            <p class="popu-label contact">Facebook <a href="https://www.facebook.com/profile.php?id=100034575303112">Huy Vũ</a></p>
+            </div>
+            <div id="footerRight">
+            <p class="popu-label credit">Nhóm: Mid travel</p>
+            <p class="popu-label credit">Thành viên:</p>
+            <ul id="members">
+                <li class="popu-label credit">Vũ Mạnh Huy</li>
+                <li class="popu-label credit">Nguyễn Lư Đức Nghĩa</li>
+                <li class="popu-label credit">Nguyễn Long</li>
+            </ul>
+            </div>
+        </div>
+    </div>
   </div>
   <script src="./FB.js" type="module"></script>
   <script type="module" src="/main.js"></script>

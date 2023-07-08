@@ -5,7 +5,7 @@
             <button id="B_home" class="navText">Trang Chủ</button>
         </div>
         <div id="navRight">
-            <button id="B_signIn/Up" class="navText">Đăng kí / Đăng Nhập</button>
+            <button id="B_signInUp" class="navText">Đăng kí / Đăng Nhập</button>
             <button id="B_aboutUs" class="navText">Về chúng tôi</button>
         </div>
     </div>
@@ -52,7 +52,7 @@
                     </ul>
                   </div>
             </div>
-            <img src="./img_sreach.png" alt="">
+            <img src="./img_sreach.png" alt="" id="img_sreach">
             </div>
       </div>
     </div>
