@@ -143,6 +143,7 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
             selectedOption1 = target.textContent;
             localStorage.setItem("departure",selectedOption1);
             console.log('Selected option 1:', selectedOption1);
+            dropdownMenu2.innerHTML = await getData2(selectedOption1);
         }
         });
 
