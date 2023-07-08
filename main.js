@@ -1,3 +1,7 @@
+/// Other variable
+var In = false;
+
+
 /// Setup dropdown
 
 // Get dropdown toggle buttons and dropdown menus
@@ -51,8 +55,9 @@ if(dropdownToggle1 != null){
     }
   });}
 
-document.querySelector("#B_home").addEventListener('click',() => {
-  document.querySelector(".all").innerHTML = `<div id="E_navBar">
+/// Handle SPA
+document.querySelector("#B_home").addEventListener('click',() => { // Nút trang chủ
+  document.querySelector(".all").innerHTML = `
   <div id="P_home" class="all">
       <div id="E_navBar">
           <div id="navLeft">
@@ -153,4 +158,144 @@ document.querySelector("#B_home").addEventListener('click',() => {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`
+})
+
+document.querySelector("#B_signIn/Up").addEventListener('click',() => { // Nút đăng kí / đăng nhập
+  document.querySelector(".all").innerHTML = `
+  <div id="P_signIn" class="copy">
+    <div id="E_navBar">
+        <div id="navLeft">
+            <img src="./Logo.png" alt="" id="img_logo">
+            <button id="B_home" class="navText">Trang Chủ</button>
+        </div>
+        <div id="navRight">
+            <button id="B_signIn/Up" class="navText">Đăng kí / Đăng Nhập</button>
+            <button id="B_aboutUs" class="navText">Về chúng tôi</button>
+        </div>
+    </div>
+    <div id="E_signIn">
+      <div id="Option">
+        <button type="button" id="UpOption" class="control" title="Up">Đăng Kí</button>
+        <button type="button" id="InOption" class="control" title="In">Đăng Nhập</button>
+      </div>
+      <div id="Input">
+        <p class="popu-label indi">Email</p>
+        <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
+        <p class="popu-label indi">Số điện thoại</p>
+        <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
+        <p class="popu-label indi">Mật khẩu</p>
+        <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+        <p class="popu-label indi">Xác nhận mật khẩu</p>
+        <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
+        <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>
+      </div>
+    </div>
+    <div id="E_footer">
+        <h2 id="footerTitle">THÔNG TIN LIÊN HỆ</h2>
+        <div id="footerDown">
+            <div id="footerLeft">
+            <p class="popu-label contact">Số điện thoại: 0916134916</p>
+            <p class="popu-label contact">Email liên hệ : vumhuy0901@gmail.com</p>
+            <p class="popu-label contact">Facebook <a href="https://www.facebook.com/profile.php?id=100034575303112">Huy Vũ</a></p>
+            </div>
+            <div id="footerRight">
+            <p class="popu-label credit">Nhóm: Mid travel</p>
+            <p class="popu-label credit">Thành viên:</p>
+            <ul id="members">
+                <li class="popu-label credit">Vũ Mạnh Huy</li>
+                <li class="popu-label credit">Nguyễn Lư Đức Nghĩa</li>
+                <li class="popu-label credit">Nguyễn Long</li>
+            </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="./FB.js" type="module"></script>
+  <script type="module" src="/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`;
+  if(In == false){
+    document.querySelector("#InOption").addEventListener("click",() => {
+      document.querySelector("#Input").replace(`<p class="popu-label indi">Xác nhận mật khẩu</p>
+        <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">`,``)})
+      In = true;
+      document.querySelector("#InOption").setAttribute("color","#FF6F61")
+    }
+  else if(In == true){
+    document.querySelector("OnOption").addEventListener("click",() => {
+      document.querySelector("#Input").replace(`<p class="popu-label indi">Email</p>
+      <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
+      <p class="popu-label indi">Số điện thoại</p>
+      <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
+      <p class="popu-label indi">Mật khẩu</p>
+      <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">`,
+      `<p class="popu-label indi">Email</p>
+      <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
+      <p class="popu-label indi">Số điện thoại</p>
+      <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
+      <p class="popu-label indi">Mật khẩu</p>
+      <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+      <p class="popu-label indi">Xác nhận mật khẩu</p>
+      <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
+      `)
+    })
+  }
+})
+
+document.querySelector("#B_aboutUs").addEventListener('click',() => { // Nút about us
+  document.querySelector(".all").innerHTML = `
+  <div id="P_signIn" class="copy">
+    <div id="E_navBar">
+      <div id="navLeft">
+          <img src="./Logo.png" alt="" id="img_logo">
+          <button id="B_home" class="navText">Trang Chủ</button>
+      </div>
+      <div id="navRight">
+          <button id="B_signIn/Up" class="navText">Đăng kí / Đăng Nhập</button>
+          <button id="B_aboutUs" class="navText">Về chúng tôi</button>
+      </div>
+    </div>
+    <div id="E_aboutUs">
+      <div id="info">
+        <div id="title" class="box label">About Us</div>
+        <p id="About_text">Là những người yêu thích du lịch đi đây đi đó, chúng tôi cảm thấy rằng việc di chuyển giữa
+        các địa điểm là khoảng thời gian dài nhất trong một chuyến đi đôi khi còn là nhàm chán. Vì vậy, ta càng phải giữ sức 
+        cho những cuộc vui chơi. Trang web này sẽ giới thiệu cho bạn những chuyến đi thoải mái nhất vừa tầm giá giúp bạn bớt
+        phân vân việc chọn một hãng xe uy tín
+        </p>
+      </div>
+      <img src="./About_demo.png" alt="" id="About_demo">
+  </div>
+  <div id="E_footer">
+    <h2 id="footerTitle">Thông Tin Liên Hệ</h2>
+    <div id="footerDown">
+      <div id="footerLeft">
+        <p class="popu-label contact">Số điện thoại: 0916134916</p>
+        <p class="popu-label contact">Email liên hệ : vumhuy0901@gmail.com</p>
+        <p class="popu-label contact">Facebook <a href="https://www.facebook.com/profile.php?id=100034575303112">Huy Vũ</a></p>
+      </div>
+      <div id="footerRight">
+        <p class="popu-label credit">Nhóm:</p>
+        <p class="popu-label credit">Thành viên:</p>
+        <ul id="members">
+          <li class="popu-label credit">Vũ Mạnh Huy</li>
+          <li class="popu-label credit">Nguyễn Lư Đức Nghĩa</li>
+          <li class="popu-label credit">Nguyễn Long</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="./FB.js" type="module"></script>
+  <script type="module" src="/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`
+})
+/// Bắt đầu tìm
+document.querySelector("#img_sreach").addEventListener('click',() => {
+  
 })

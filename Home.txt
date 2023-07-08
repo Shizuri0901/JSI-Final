@@ -52,7 +52,7 @@
                     </ul>
                   </div>
             </div>
-            <img src="./img_sreach.png" alt="">
+            <img src="./img_sreach.png" alt="" id="img_sreach">
             </div>
       </div>
     </div>
