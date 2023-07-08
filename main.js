@@ -1,9 +1,9 @@
-/// Other variable
+/// Other constiable
 import { getData } from "./FB";
 const In = false;
 localStorage.setItem('page', "home");
 /// Handle SPA
-document.querySelector("#B_home").addEventListener('click',async () => { // Nút trang chủ
+document.querySelector("#B_home").addEventListener('click', async () => { // Nút trang chủ
   document.querySelector(".all").innerHTML = `
   <div id="P_home" class="copy">
     <div id="E_navBar">
@@ -104,17 +104,17 @@ document.querySelector("#B_home").addEventListener('click',async () => { // Nút
   localStorage.setItem('page', "home");
   /// Setup dropdown
   // Get dropdown toggle buttons and dropdown menus
-    var dropdownToggle1 = document.querySelector('#dropdown-toggle-1');
-    var dropdownToggle2 = document.querySelector('#dropdown-toggle-2');
-    var dropdownMenu1 = document.querySelector('#dropdown-menu-1');
-    var dropdownMenu2 = document.querySelector('#dropdown-menu-2');
+    const dropdownToggle1 = document.querySelector('#dropdown-toggle-1');
+    const dropdownToggle2 = document.querySelector('#dropdown-toggle-2');
+    const dropdownMenu1 = document.querySelector('#dropdown-menu-1');
+    const dropdownMenu2 = document.querySelector('#dropdown-menu-2');
 
 
     dropdownMenu1.innerHTML = await getData();
 
-  // Variables to store selected values
-    var selectedOption1 = '';
-    var selectedOption2 = '';
+  // constiables to store selected values
+    const selectedOption1 = '';
+    const selectedOption2 = '';
   // Toggle visibility of dropdown menu 1
     dropdownToggle1.addEventListener('click', function() {
         dropdownMenu1.classList.toggle('show');
@@ -298,5 +298,4 @@ document.querySelector("#B_aboutUs").addEventListener('click',() => { // Nút ab
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`;
   localStorage.setItem('page', "aboutUs" )
-
 })
