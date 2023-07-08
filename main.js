@@ -1,59 +1,8 @@
 /// Other variable
-var In = false;
+const In = false;
+localStorage.setItem('page', "home");
 
 
-/// Setup dropdown
-
-// Get dropdown toggle buttons and dropdown menus
-var dropdownToggle1 = document.querySelector('#dropdown-toggle-1');
-var dropdownToggle2 = document.querySelector('#dropdown-toggle-2');
-var dropdownMenu1 = document.querySelector('#dropdown-menu-1');
-var dropdownMenu2 = document.querySelector('#dropdown-menu-2');
-
-// Variables to store selected values
-var selectedOption1 = '';
-var selectedOption2 = '';
-if(dropdownToggle1 != null){
-  // Toggle visibility of dropdown menu 1
-  dropdownToggle1.addEventListener('click', function() {
-    dropdownMenu1.classList.toggle('show');
-  });
-
-  // Toggle visibility of dropdown menu 2
-  dropdownToggle2.addEventListener('click', function() {
-    dropdownMenu2.classList.toggle('show');
-  });
-
-  // Close dropdown menus when clicking outside of them
-  document.addEventListener('click', function(event) {
-    var target = event.target;
-    if (target !== dropdownToggle1 && !dropdownToggle1.contains(target)) {
-      dropdownMenu1.classList.remove('show');
-    }
-    if (target !== dropdownToggle2 && !dropdownToggle2.contains(target)) {
-      dropdownMenu2.classList.remove('show');
-    }
-  });
-
-  // Handle click on dropdown menu 1 items
-  dropdownMenu1.addEventListener('click', function(event) {
-    var target = event.target;
-    if (target.classList.contains('dropdown-item')) {
-      selectedOption1 = target.textContent;
-      localStorage.setItem("departure",selectedOption1);
-      console.log('Selected option 1:', selectedOption1);
-    }
-  });
-
-  // Handle click on dropdown menu 2 items
-  dropdownMenu2.addEventListener('click', function(event) {
-    var target = event.target;
-    if (target.classList.contains('dropdown-item')) {
-      selectedOption2 = target.textContent;
-      localStorage.setItem("arrival",selectedOption2);
-      console.log('Selected option 2:', selectedOption2);
-    }
-  });}
 
 /// Handle SPA
 document.querySelector("#B_home").addEventListener('click',() => { // Nút trang chủ
@@ -157,10 +106,65 @@ document.querySelector("#B_home").addEventListener('click',() => { // Nút trang
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`;
+  localStorage.setItem('page', "home");
+  /// Setup dropdown
+  // Get dropdown toggle buttons and dropdown menus
+    var dropdownToggle1 = document.querySelector('#dropdown-toggle-1');
+    var dropdownToggle2 = document.querySelector('#dropdown-toggle-2');
+    var dropdownMenu1 = document.querySelector('#dropdown-menu-1');
+    var dropdownMenu2 = document.querySelector('#dropdown-menu-2');
+
+  // Variables to store selected values
+    var selectedOption1 = '';
+    var selectedOption2 = '';
+  // Toggle visibility of dropdown menu 1
+    dropdownToggle1.addEventListener('click', function() {
+        dropdownMenu1.classList.toggle('show');
+        });
+
+    // Toggle visibility of dropdown menu 2
+    dropdownToggle2.addEventListener('click', function() {
+        dropdownMenu2.classList.toggle('show');
+        });
+
+    // Close dropdown menus when clicking outside of them
+    document.addEventListener('click', function(event) {
+        let target = event.target;
+        if (target !== dropdownToggle1 && !dropdownToggle1.contains(target)) {
+            dropdownMenu1.classList.remove('show');
+        }
+        if (target !== dropdownToggle2 && !dropdownToggle2.contains(target)) {
+            dropdownMenu2.classList.remove('show');
+        }
+        });
+
+    // Handle click on dropdown menu 1 items
+    dropdownMenu1.addEventListener('click', function(event) {
+        let target = event.target;
+        if (target.classList.contains('dropdown-item')) {
+            selectedOption1 = target.textContent;
+            localStorage.setItem("departure",selectedOption1);
+            console.log('Selected option 1:', selectedOption1);
+        }
+        });
+
+    // Handle click on dropdown menu 2 items
+    dropdownMenu2.addEventListener('click', function(event) {
+        let target = event.target;
+        if (target.classList.contains('dropdown-item')) {
+            selectedOption2 = target.textContent;
+            localStorage.setItem("arrival",selectedOption2);
+            console.log('Selected option 2:', selectedOption2);
+        }
+        });
+    /// Bắt đầu tìm
+    document.querySelector("#img_sreach").addEventListener('click',() => {
+
+    })
 })
 
-document.querySelector("#B_signIn/Up").addEventListener('click',() => { // Nút đăng kí / đăng nhập
+document.querySelector("#B_signInUp").addEventListener('click',() => { // Nút đăng kí / đăng nhập
   document.querySelector(".all").innerHTML = `
   <div id="P_signIn" class="copy">
     <div id="E_navBar">
@@ -216,6 +220,8 @@ document.querySelector("#B_signIn/Up").addEventListener('click',() => { // Nút 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`;
+  localStorage.setItem('page', "Sign");
+  /// Set up sign in và sign up
   if(In == false){
     document.querySelector("#InOption").addEventListener("click",() => {
       document.querySelector("#Input").replace(`<p class="popu-label indi">Xác nhận mật khẩu</p>
@@ -293,9 +299,6 @@ document.querySelector("#B_aboutUs").addEventListener('click',() => { // Nút ab
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`
-})
-/// Bắt đầu tìm
-document.querySelector("#img_sreach").addEventListener('click',() => {
-  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>`;
+  localStorage.setItem('page', "aboutUs" )
 })
