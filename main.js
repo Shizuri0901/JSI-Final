@@ -43,7 +43,7 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
                     Vui lòng chọn điểm đến
                   </button>
                   <ul class="dropdown-menu" id="dropdown-menu-2">
-                    
+                    ${getData2}
                   </ul>
                 </div>
           </div>

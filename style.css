@@ -265,7 +265,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  background-image: url();
+  background-image: url(./popu_box.png);
 }
 
 .popu_image {
