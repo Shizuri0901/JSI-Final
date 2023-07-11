@@ -6,6 +6,7 @@ import "firebase/firestore";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,6 +24,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app)
 const analytics = getAnalytics(app);
@@ -55,7 +57,7 @@ export let getData2 = async (start_point) => {
   return all
 }
 // 3 chuyen pho bien
-export let getPopularTrip = async (start_point="An Giang") => {
+export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") => {
   let all = `<h2 class="title">Một số tuyến phổ biến</h2>`
   const docRef = doc(db, "Trip-info", start_point);
   const docSnap = await getDoc(docRef);
@@ -79,4 +81,26 @@ export let getPopularTrip = async (start_point="An Giang") => {
     console.log("No such document!");
   }
   return all
+}
+
+export async function signUp(email, password) {
+  try {
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    const user = userCredential.user;
+    console.log("User signed up successfully:", user.uid);
+    // Additional actions after successful sign up
+  } catch (error) {
+    console.error("Sign up failed:", error.message);
+  }
+}
+
+export async function signIn(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User signed in successfully:", user.uid);
+    // Additional actions after successful sign in
+  } catch (error) {
+    console.error("Sign in failed:", error.message);
+  }
 }

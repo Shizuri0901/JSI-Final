@@ -261,3 +261,22 @@ body {
   line-height: normal;
   margin-top: 10px;
 }
+.popu_box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-image: url();
+}
+
+.popu_image {
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.popu_info {
+  font-family: "Alegreya", serif;
+  font-style: italic;
+  color: #1BB80E;
+}
