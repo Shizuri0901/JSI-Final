@@ -2,8 +2,7 @@
 import { getData, getData2, getPopularTrip, signUp} from "./FB";
 let In = false;
 localStorage.setItem('page', "home");
-/// Handle SPA
-document.querySelector("#B_home").addEventListener('click', async () => { // Nút trang chủ
+let render_home = async () => {
   document.querySelector("#content").innerHTML = `
     <div id="E_bookingAndCarousel">
       <div id="carousel" class="carousel slide" data-bs-ride="carousel">
@@ -19,7 +18,7 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
           </div>
           <div class="carousel-item">
             <img src="carousel_4.png" class="d-block w-100" alt="...">
-        </div>
+          </div>
           </div>
       </div>
       <div id="booking" class="overlay">
@@ -32,7 +31,7 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
                   Vui lòng chọn điểm đi
                 </button>
                 <ul class="dropdown-menu" id="dropdown-menu-1">
-                  ${getData}
+                  ${await getData()}
                 </ul>
               </div>
           </div>
@@ -43,17 +42,17 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
                     Vui lòng chọn điểm đến
                   </button>
                   <ul class="dropdown-menu" id="dropdown-menu-2">
-                    ${getData2}
                   </ul>
                 </div>
           </div>
           <img src="./img_sreach.png" alt="" id="img_sreach">
-          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div id="E_popular">
-    ${await getPopularTrip}
-  </div>`;
+    <div id="E_popular">
+      ${await getPopularTrip()}
+    </div>
+  `;
   localStorage.setItem('page', "home");
   /// Setup dropdown
   // Get dropdown toggle buttons and dropdown menus
@@ -93,9 +92,9 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
     dropdownMenu1.addEventListener('click', async function(event) {
         let target = event.target;
         if (target.classList.contains('dropdown-item')) {
-            selectedOption1 = target.textContent;
+            let selectedOption1 = target.textContent;
             localStorage.setItem("departure",selectedOption1);
-            console.log('Selected option 1:', selectedOption1);
+            document.querySelector("#dropdown-toggle-1").textContent = selectedOption1;
             dropdownMenu2.innerHTML = await getData2(selectedOption1);
         }
         });
@@ -104,18 +103,17 @@ document.querySelector("#B_home").addEventListener('click', async () => { // Nú
     dropdownMenu2.addEventListener('click', function(event) {
         let target = event.target;
         if (target.classList.contains('dropdown-item')) {
-            selectedOption2 = target.textContent;
+            let selectedOption2 = target.textContent;
             localStorage.setItem("arrival",selectedOption2);
-            console.log('Selected option 2:', selectedOption2);
+            document.querySelector("#dropdown-toggle-2").textContent = selectedOption2;
         }
         });
     /// Bắt đầu tìm
     document.querySelector("#img_sreach").addEventListener('click',() => {
 
     })
-})
-
-document.querySelector("#B_signInUp").addEventListener('click',() => { // Nút đăng kí / đăng nhập
+}
+let render_sign = async () => {
   document.querySelector("#content").innerHTML = `
   <div id="E_signIn">
       <div id="Option">
@@ -136,43 +134,40 @@ document.querySelector("#B_signInUp").addEventListener('click',() => { // Nút �
     </div>`;
     localStorage.setItem('page', "Sign");
   /// Set up sign in và sign up
-    if(In == false){
-    document.querySelector("#InOption").addEventListener("click",() => {
-      document.querySelector("#Input").value.replace(`<p class="popu-label indi">Xác nhận mật khẩu</p>
-        <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">`,``)})
-      In = true;
-      document.querySelector("#InOption").setAttribute("color","#FF6F61")
-      document.querySelector("#B_confirm").addEventListener("click",()=>{
-        let passconf = document.querySelector("#Inp-passwordConf").value;
-        let pass = document.querySelector("#Inp-password").value;
-        let email = document.querySelector("#Inp-email").value;
-        if (passconf == pass){
-          signUp(email,pass);
-        }
-      })
-    }
-  else if(In == true){
-    document.querySelector("OnOption").addEventListener("click",() => {
-      document.querySelector("#Input").value.replace(`<p class="popu-label indi">Email</p>
-      <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
-      <p class="popu-label indi">Số điện thoại</p>
-      <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
-      <p class="popu-label indi">Mật khẩu</p>
-      <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">`,
-      `<p class="popu-label indi">Email</p>
+  document.querySelector("#InOption").addEventListener("click",() => {
+    document.querySelector("#Input").innerHTML = `
+    <p class="popu-label indi">Email</p>
+    <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
+    <p class="popu-label indi">Mật khẩu</p>
+    <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+    <p class="popu-label indi">Số điện thoại</p>
+    <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
+    <p class="popu-label indi">Mật khẩu</p>
+    <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">`})
+    In = true;
+    document.querySelector("#InOption").setAttribute("color","#FF6F61")
+    document.querySelector("#B_confirm").addEventListener("click",()=>{
+      let passconf = document.querySelector("#Inp-passwordConf").value;
+      let pass = document.querySelector("#Inp-password").value;
+      let email = document.querySelector("#Inp-email").value;
+      if (passconf == pass){
+        signUp(email,pass);
+    }})
+  
+    document.querySelector("UpOption").addEventListener("click",() => {
+      document.querySelector("#Input").innerHTML =`
+      <p class="popu-label indi">Email</p>
       <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
       <p class="popu-label indi">Số điện thoại</p>
       <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
       <p class="popu-label indi">Mật khẩu</p>
       <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
       <p class="popu-label indi">Xác nhận mật khẩu</p>
-      <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
-      `)
+      <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">`
     })
-  }
-})
+}
 
-document.querySelector("#B_aboutUs").addEventListener('click',() => { // Nút about us
+let render_about = async () => {
   document.querySelector("#content").innerHTML = `
   <div id="E_aboutUs">
       <div id="info">
@@ -184,6 +179,29 @@ document.querySelector("#B_aboutUs").addEventListener('click',() => { // Nút ab
         </p>
       </div>
       <img src="./About_demo.png" alt="" id="About_demo">
-  </div>`
+  </div>`;
   localStorage.setItem('page', "aboutUs" )
+}
+
+if(localStorage.getItem('page') == "home"){
+  render_home();
+}
+else if(localStorage.getItem('page') == "sign"){
+  render_sign();
+}
+else if(localStorage.getItem('page') == "aboutUs"){
+  render_about();
+}
+else{
+  render_home();
+}
+/// Handle SPA
+document.querySelector("#B_home").addEventListener('click', async () => { // Nút trang chủ
+  render_home()
+})
+document.querySelector("#B_signInUp").addEventListener('click',() => { // Nút đăng kí / đăng nhập
+  render_sign()
+})
+document.querySelector("#B_aboutUs").addEventListener('click',() => { // Nút about us
+  render_about();
 })
