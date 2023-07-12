@@ -261,3 +261,33 @@ body {
   line-height: normal;
   margin-top: 10px;
 }
+.popu_box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  width: 80%;
+  height: 200px;
+  background-image: url(./popu_box.png);
+  background-size: cover; /* Scale the background image to cover the entire element */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: center; /* Position the background image at the center */
+}
+
+
+.popu_image {
+  width: 288px;
+  height: 161px;
+  margin-left: 50px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.popu_info {
+  font-family: "Alegreya", serif;
+  font-style: italic;
+  color: #1BB80E;
+  margin-right: 50px;
+  margin-top: 50px;
+}
