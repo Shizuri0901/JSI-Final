@@ -102,3 +102,31 @@ export async function signIn(email, password) {
     console.error("Sign in failed:", error.message);
   }
 }
+
+export let fetchData = async (a, b) => {
+  const tripInfoRef = doc(db, "Trip-info", a);
+  const docSnap = await getDoc(tripInfoRef);
+
+  let result = [];
+
+  if (docSnap.exists()) {
+    const endArray = docSnap.data().end || [];
+
+    endArray.forEach((item) => {
+      if (item.b === b) {
+        const isB = item.isB;
+        result.push(isB);
+      }
+    });
+  }
+
+  return `<div class="popu_box">
+  <img src="${b['vehicle-image']}" alt="" class="popu_image">
+  <div class="popu_info">
+    <p class="popu-label">Điểm đi: ${a}</p>
+    <p class="popu-label">Điểm đến: ${b.name}</p>
+    <p class="popu-label">Giá tiền: ${b.price}</p>
+    <p class="popu-label">Thời gian di chuyển: ${b.time}</p>
+  </div>
+</div>`;
+};

@@ -1,5 +1,5 @@
 /// Other constiable
-import { getData, getData2, getPopularTrip, signUp} from "./FB";
+import { getData, getData2, getPopularTrip, signIn, signUp, fetchData} from "./FB";
 let In = false;
 localStorage.setItem('page', "home");
 let render_home = async () => {
@@ -109,8 +109,9 @@ let render_home = async () => {
         }
         });
     /// Bắt đầu tìm
-    document.querySelector("#img_sreach").addEventListener('click',() => {
-
+    document.querySelector("#img_sreach").addEventListener('click',async () => {
+      const result = fetchData(dropdownMenu1.textContent, dropdownMenu2.textContent);
+      document.querySelector("#E_popular").innerHTML = result;
     })
 }
 let render_sign = async () => {
@@ -137,15 +138,29 @@ let render_sign = async () => {
   document.querySelector("#InOption").addEventListener("click",() => {
     document.querySelector("#Input").innerHTML = `
     <p class="popu-label indi">Email</p>
-    <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
-    <p class="popu-label indi">Mật khẩu</p>
-    <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+    <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email thật">
     <p class="popu-label indi">Số điện thoại</p>
     <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
     <p class="popu-label indi">Mật khẩu</p>
-    <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">`})
-    In = true;
+    <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+    <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>`})
     document.querySelector("#InOption").setAttribute("color","#FF6F61")
+    document.querySelector("#B_confirm").addEventListener("click",()=>{
+      signIn(email,pass);
+    })
+  
+    document.querySelector("#UpOption").addEventListener("click",() => {
+      document.querySelector("#Input").innerHTML =`
+      <p class="popu-label indi">Email</p>
+      <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email thật">
+      <p class="popu-label indi">Số điện thoại</p>
+      <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
+      <p class="popu-label indi">Mật khẩu</p>
+      <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+      <p class="popu-label indi">Xác nhận mật khẩu</p>
+      <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
+      <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>`
+      document.querySelector("#InOption").setAttribute("color","#FF6F61")
     document.querySelector("#B_confirm").addEventListener("click",()=>{
       let passconf = document.querySelector("#Inp-passwordConf").value;
       let pass = document.querySelector("#Inp-password").value;
@@ -153,17 +168,6 @@ let render_sign = async () => {
       if (passconf == pass){
         signUp(email,pass);
     }})
-  
-    document.querySelector("UpOption").addEventListener("click",() => {
-      document.querySelector("#Input").innerHTML =`
-      <p class="popu-label indi">Email</p>
-      <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
-      <p class="popu-label indi">Số điện thoại</p>
-      <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
-      <p class="popu-label indi">Mật khẩu</p>
-      <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
-      <p class="popu-label indi">Xác nhận mật khẩu</p>
-      <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">`
     })
 }
 
