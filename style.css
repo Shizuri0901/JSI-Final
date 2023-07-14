@@ -220,6 +220,12 @@ body {
   display: flex;
   justify-content: space-around;
 }
+#InOption {
+  color: #008080;
+}
+#UpOption {
+  color: #702929;
+}
 #B_confirm {
   margin-top: 10px;
   margin-left: 175px;
@@ -290,4 +296,10 @@ body {
   color: #1BB80E;
   margin-right: 50px;
   margin-top: 50px;
+}
+#error {
+  color: red;  
+  font-family: "Alegreya", serif;
+  font-style: italic;
+  margin: 20px;
 }

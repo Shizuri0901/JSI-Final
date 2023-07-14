@@ -110,7 +110,7 @@ let render_home = async () => {
         });
     /// Bắt đầu tìm
     document.querySelector("#img_sreach").addEventListener('click',async () => {
-      const result = fetchData(dropdownMenu1.textContent, dropdownMenu2.textContent);
+      const result = await fetchData(document.querySelector("#dropdown-toggle-1").textContent, document.querySelector("#dropdown-toggle-2").textContent);
       document.querySelector("#E_popular").innerHTML = result;
     })
 }
@@ -118,8 +118,8 @@ let render_sign = async () => {
   document.querySelector("#content").innerHTML = `
   <div id="E_signIn">
       <div id="Option">
-        <button type="button" id="UpOption" class="control" title="Up">Đăng Kí</button>
-        <button type="button" id="InOption" class="control" title="In">Đăng Nhập</button>
+        <button type="button" id="UpOption" class="control" title="Đăng Kí">Đăng Kí</button>
+        <button type="button" id="InOption" class="control" title="Đăng Nhập">Đăng Nhập</button>
       </div>
       <div id="Input">
         <p class="popu-label indi">Email</p>
@@ -143,11 +143,14 @@ let render_sign = async () => {
     <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
     <p class="popu-label indi">Mật khẩu</p>
     <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
-    <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>`})
-    document.querySelector("#InOption").setAttribute("color","#FF6F61")
+    <span id="error"></span>
+    <button title="conf" class="B_search" type="button" id="B_confirm">Xác nhận</button>`
+    document.querySelector("#InOption").style.color ="#702929";
+    document.querySelector("#UpOption").style.color = "#008080";
     document.querySelector("#B_confirm").addEventListener("click",()=>{
       signIn(email,pass);
     })
+  })
   
     document.querySelector("#UpOption").addEventListener("click",() => {
       document.querySelector("#Input").innerHTML =`
@@ -159,14 +162,16 @@ let render_sign = async () => {
       <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
       <p class="popu-label indi">Xác nhận mật khẩu</p>
       <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
-      <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>`
-      document.querySelector("#InOption").setAttribute("color","#FF6F61")
-    document.querySelector("#B_confirm").addEventListener("click",()=>{
-      let passconf = document.querySelector("#Inp-passwordConf").value;
-      let pass = document.querySelector("#Inp-password").value;
-      let email = document.querySelector("#Inp-email").value;
-      if (passconf == pass){
-        signUp(email,pass);
+      <span id="error"></span>
+      <button title="conf" class="B_search" type="button" id="B_confirm">Xác nhận</button>`
+      document.querySelector("#UpOption").style.color ="#702929";
+      document.querySelector("#InOption").style.color ="#008080";
+      document.querySelector("#B_confirm").addEventListener("click",()=>{
+        let passconf = document.querySelector("#Inp-passwordConf").value;
+        let pass = document.querySelector("#Inp-password").value;
+        let email = document.querySelector("#Inp-email").value;
+        if (passconf == pass){
+          signUp(email,pass);
     }})
     })
 }

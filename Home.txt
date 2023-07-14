@@ -10,63 +10,52 @@
         </div>
     </div>
     <div id="E_bookingAndCarousel">
-        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="carousel_1.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="carousel_2.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="carousel_3.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="carousel_4.png" class="d-block w-100" alt="...">
+      <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="carousel_1.png" class="d-block w-100" alt="...">
           </div>
-            </div>
-        </div>
-        <div id="booking" class="overlay">
-          <h2 class="title">Hãy tìm chuyến của bạn</h2>
-          <div id="search">
-            <div id="S_departure" class="box">
-              <p id="L_departure" class="label">Điểm đi</p>
+          <div class="carousel-item">
+              <img src="carousel_2.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+              <img src="carousel_3.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="carousel_4.png" class="d-block w-100" alt="...">
+          </div>
+          </div>
+      </div>
+      <div id="booking" class="overlay">
+        <h2 class="title">Hãy tìm chuyến của bạn</h2>
+        <div id="search">
+          <div id="S_departure" class="box">
+            <p id="L_departure" class="label">Điểm đi</p>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-toggle-1">
+                  Vui lòng chọn điểm đi
+                </button>
+                <ul class="dropdown-menu" id="dropdown-menu-1">
+                  ${await getData()}
+                </ul>
+              </div>
+          </div>
+          <div id="S_arrival" class="box">
+              <p id="L_arrival" class="label">Điểm đến</p>
               <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-toggle-1">
-                    Dropdown button
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-toggle-2">
+                    Vui lòng chọn điểm đến
                   </button>
-                  <ul class="dropdown-menu" id="dropdown-menu-1">
-                    <li><a class="dropdown-item" href="#">Action1</a></li>
-                    <li><a class="dropdown-item" href="#">Action2</a></li>
+                  <ul class="dropdown-menu" id="dropdown-menu-2">
                   </ul>
                 </div>
-            </div>
-            <div id="S_arrival" class="box">
-                <p id="L_arrival" class="label">Điểm đến</p>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-toggle-2">
-                      Dropdown button
-                    </button>
-                    <ul class="dropdown-menu" id="dropdown-menu-2">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                    </ul>
-                  </div>
-            </div>
-            <img src="./img_sreach.png" alt="" id="img_sreach">
-            </div>
+          </div>
+          <img src="./img_sreach.png" alt="" id="img_sreach">
+        </div>
       </div>
     </div>
     <div id="E_popular">
-      <h2 class="title">Một số tuyến phổ biến</h2>
-      <div class="popu_box">
-        <img src="" alt="" class="popu_image">
-        <div class="popu_info">
-          <p class="popu-label"></p>
-          <p class="popu-label"></p>
-          <p class="popu-label"></p>
-          <p class="popu-label"></p>
-        </div>
-      </div>
+      ${await getPopularTrip()}
     </div>
     <div id="E_footer">
       <h2 id="footerTitle">Thông Tin Liên Hệ</h2>
