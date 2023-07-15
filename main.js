@@ -1,7 +1,7 @@
 /// Other constiable
 import { getData, getData2, getPopularTrip, signIn, signUp, fetchData} from "./FB";
 localStorage.setItem('page', "home");
-let render_home = async () => {
+export let render_home = async () => {
   document.querySelector("#content").innerHTML = `
     <div id="E_bookingAndCarousel">
       <div id="carousel" class="carousel slide" data-bs-ride="carousel">
@@ -113,7 +113,7 @@ let render_home = async () => {
       document.querySelector("#E_popular").innerHTML = result;
     })
 }
-let render_sign = async () => {
+export let render_sign = async () => {
   document.querySelector("#content").innerHTML = `
   <div id="E_signIn">
       <div id="Option">
@@ -186,7 +186,7 @@ let render_sign = async () => {
     })
 }
 
-let render_about = async () => {
+export let render_about = async () => {
   document.querySelector("#content").innerHTML = `
   <div id="E_aboutUs">
       <div id="info">

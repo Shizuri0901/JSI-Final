@@ -7,6 +7,7 @@ import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { render_sign } from "./main";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -61,8 +62,10 @@ export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") =>
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
+    let i = 1;
     docSnap.data()['end'].forEach((end_point) => {
-      all += `<div class="popu_box">
+      if(localStorage.getItem('kog') == false){
+        all += `<div class="popu_box">
         <img src="${end_point['vehicle-image']}" alt="" class="popu_image">
         <div class="popu_info">
           <p class="popu-label">Điểm đi: ${start_point}</p>
@@ -70,8 +73,36 @@ export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") =>
           <p class="popu-label">Giá tiền: ${end_point.price}</p>
           <p class="popu-label">Thời gian di chuyển: ${end_point.time}</p>
         </div>
-      </div>`;
+      </div>`
+      }
+      else{
+        i += 1;
+        all += `<div class="popu_box">
+          <img src="${end_point['vehicle-image']}" alt="" class="popu_image">
+          <div class="popu_info">
+            <p class="popu-label">Điểm đi: ${start_point}</p>
+            <p class="popu-label">Điểm đến: ${end_point.name}</p>
+            <p class="popu-label">Giá tiền: ${end_point.price}</p>
+            <p class="popu-label">Thời gian di chuyển: ${end_point.time}</p>
+          </div>
+          <button id="btn_${i}">Đặt xe</button>
+        </div>`;
+    }
     });
+    const parentElement  = document.querySelector("#E_popular");
+    // parentElement.addEventListener("click", (event) => {
+    //   // Check if the clicked element is a button
+    //   if (event.target.tagName === "BUTTON") {
+    //     // Get the closest div element relative to the clicked button
+    //     const divElement = event.target.closest("div");
+        
+    //     // Check if a div element was found
+    //     if (divElement) {
+    //       // ... do something with the div element
+    //       console.log(divElement);
+    //     }
+    //   }
+    // });
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
@@ -80,7 +111,6 @@ export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") =>
   return all;
 };
 
-const log = false;
 export async function signUp(email, password) {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth,email, password);
@@ -91,13 +121,16 @@ export async function signUp(email, password) {
     console.error("Sign up failed:", error.message);
   }
 }
+
+localStorage.setItem("log",false)
 export let Log_out = () => {
   signOut(auth).then(() => {
     console.log("Sign Out success");
     document.querySelector("#navRight").innerHTML = `
       <button id="B_signInUp" class="navText">Đăng kí / Đăng Nhập</button>
       <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
-    log = false;
+      localStorage.setItem("log",false)
+    render_sign()
   }).catch((error) => {
     console.log("Sign Out failed", error.message);
   });
@@ -113,9 +146,14 @@ export async function signIn(email, password) {
         <button title="Log_out" id="logOut">Log Out</button>
       </div>
       <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
-      log = true;
+      localStorage.setItem("log",true)
     document.querySelector("logOut").addEventListener("click", () => {
       signOut()
+      document.querySelector("#navRight").innerHTML =  `
+        <button id="B_signInUp" class="navText">Đăng kí / Đăng Nhập</button>
+        <button id="B_aboutUs" class="navText">Về chúng tôi</button>
+      `
+      render_sign();
     })
   } catch (error) {
     console.error("Sign in failed:", error.message);
