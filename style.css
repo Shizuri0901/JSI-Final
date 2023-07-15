@@ -63,7 +63,7 @@ body {
 .navText {
   border: transparent 0px;
   background-color: transparent;
-  color: #008080;
+  color: brown;
   text-align: center;
   font-size: 20px;
   font-family: Sansita Swashed;
@@ -86,6 +86,8 @@ body {
   height: 400px
 }
 #navRight {
+  position: relative;
+  display: inline-block;
   margin-right: 30px;
 }
 #navLeft {
@@ -101,6 +103,20 @@ body {
   width: 300px;
   height: 100px;
   flex-shrink: 0;
+}
+.text-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+#navRight:hover .text-box {
+  opacity: 1;
 }
 .label {
   color: #702929;
@@ -118,8 +134,10 @@ body {
   justify-content: space-around;
 }
 .B_search {
-  color: #FFD166;
+  color: yellow;
   border-radius: 20px;
+  padding: 10px;
+  width: 120px;
   text-align: center;
   font-size: 20px;
   font-family: Lobster;
@@ -218,6 +236,12 @@ body {
   display: flex;
   justify-content: space-around;
 }
+#InOption {
+  color: #008080;
+}
+#UpOption {
+  color: #702929;
+}
 #B_confirm {
   margin-top: 10px;
   margin-left: 175px;
@@ -227,6 +251,7 @@ body {
   background: #D9D9D9;
   width: 483px;
   height: 62px;
+  padding-left: 15px;
 }
 .dropdown-menu {
   color: black;
@@ -257,4 +282,40 @@ body {
   font-weight: 600;
   line-height: normal;
   margin-top: 10px;
+}
+.popu_box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  width: 80%;
+  height: 200px;
+  background-image: url(./popu_box.png);
+  background-size: cover; /* Scale the background image to cover the entire element */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: center; /* Position the background image at the center */
+}
+
+
+.popu_image {
+  width: 288px;
+  height: 161px;
+  margin-left: 50px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.popu_info {
+  font-family: "Alegreya", serif;
+  font-style: italic;
+  color: #1BB80E;
+  margin-right: 50px;
+  margin-top: 50px;
+}
+#error {
+  color: red;  
+  font-family: "Alegreya", serif;
+  font-style: italic;
+  margin: 20px;
 }
