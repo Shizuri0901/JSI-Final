@@ -6,7 +6,7 @@ import "firebase/firestore";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -80,10 +80,10 @@ export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") =>
   return all;
 };
 
-
+const log = false;
 export async function signUp(email, password) {
   try {
-    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    const userCredential = await createUserWithEmailAndPassword(auth,email, password);
     const user = userCredential.user;
     console.log("User signed up successfully:", user.uid);
     // Additional actions after successful sign up
@@ -91,13 +91,32 @@ export async function signUp(email, password) {
     console.error("Sign up failed:", error.message);
   }
 }
-
+export let Log_out = () => {
+  signOut(auth).then(() => {
+    console.log("Sign Out success");
+    document.querySelector("#navRight").innerHTML = `
+      <button id="B_signInUp" class="navText">Đăng kí / Đăng Nhập</button>
+      <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
+    log = false;
+  }).catch((error) => {
+    console.log("Sign Out failed", error.message);
+  });
+}
 export async function signIn(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     console.log("User signed in successfully:", user.uid);
-    // Additional actions after successful sign in
+    document.querySelector("#navRight").innerHTML = `        
+      <img scr="./blank_logo.png" alt="user">
+      <div class="text-box">
+        <button title="Log_out" id="logOut">Log Out</button>
+      </div>
+      <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
+      log = true;
+    document.querySelector("logOut").addEventListener("click", () => {
+      signOut()
+    })
   } catch (error) {
     console.error("Sign in failed:", error.message);
   }

@@ -1,6 +1,5 @@
 /// Other constiable
 import { getData, getData2, getPopularTrip, signIn, signUp, fetchData} from "./FB";
-let In = false;
 localStorage.setItem('page', "home");
 let render_home = async () => {
   document.querySelector("#content").innerHTML = `
@@ -133,6 +132,14 @@ let render_sign = async () => {
         <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>
       </div>
     </div>`;
+    document.querySelector("#B_confirm").addEventListener("click",()=>{
+      let passconf = document.querySelector("#Inp-passwordConf").value;
+      let pass = document.querySelector("#Inp-password").value;
+      let email = document.querySelector("#Inp-email").value;
+      if (passconf == pass){
+        signUp(email,pass);
+      }
+    })
     localStorage.setItem('page', "Sign");
   /// Set up sign in và sign up
   document.querySelector("#InOption").addEventListener("click",() => {
@@ -148,6 +155,8 @@ let render_sign = async () => {
     document.querySelector("#InOption").style.color ="#702929";
     document.querySelector("#UpOption").style.color = "#008080";
     document.querySelector("#B_confirm").addEventListener("click",()=>{
+      let pass = document.querySelector("#Inp-password").value;
+      let email = document.querySelector("#Inp-email").value;
       signIn(email,pass);
     })
   })
@@ -172,7 +181,8 @@ let render_sign = async () => {
         let email = document.querySelector("#Inp-email").value;
         if (passconf == pass){
           signUp(email,pass);
-    }})
+        }
+      })
     })
 }
 

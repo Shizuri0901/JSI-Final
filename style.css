@@ -86,6 +86,8 @@ body {
   height: 400px
 }
 #navRight {
+  position: relative;
+  display: inline-block;
   margin-right: 30px;
 }
 #navLeft {
@@ -101,6 +103,20 @@ body {
   width: 300px;
   height: 100px;
   flex-shrink: 0;
+}
+.text-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+#navRight:hover .text-box {
+  opacity: 1;
 }
 .label {
   color: #702929;
