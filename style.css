@@ -86,6 +86,8 @@ body {
   height: 400px
 }
 #navRight {
+  position: relative;
+  display: inline-block;
   margin-right: 30px;
 }
 #navLeft {
@@ -101,6 +103,20 @@ body {
   width: 300px;
   height: 100px;
   flex-shrink: 0;
+}
+.text-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+#navRight:hover .text-box {
+  opacity: 1;
 }
 .label {
   color: #702929;
@@ -220,6 +236,12 @@ body {
   display: flex;
   justify-content: space-around;
 }
+#InOption {
+  color: #008080;
+}
+#UpOption {
+  color: #702929;
+}
 #B_confirm {
   margin-top: 10px;
   margin-left: 175px;
@@ -290,4 +312,10 @@ body {
   color: #1BB80E;
   margin-right: 50px;
   margin-top: 50px;
+}
+#error {
+  color: red;  
+  font-family: "Alegreya", serif;
+  font-style: italic;
+  margin: 20px;
 }
