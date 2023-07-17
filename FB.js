@@ -1,5 +1,5 @@
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs, doc, getDoc  } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 // Required for side-effects
 import "firebase/firestore";
@@ -7,7 +7,7 @@ import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { render_sign } from "./main";
+import { render_sign, render_home } from "./main";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -39,6 +39,29 @@ export let getData = async () => {
   return all
 }
 
+export let setData = async (gmail,uname,dep,arr,pri) => {
+  let prev = []
+  const docRef = doc(db, "user", gmail);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    docSnap.data()['history'].forEach((item) => {
+      prev.push(item)
+    })
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  prev.push({
+    name: uname,
+    departure: dep,
+    arrival: arr,
+    price: pri
+  });
+  
+  await setDoc(doc(db, "user", gmail), {
+    history: prev
+  })};
+
 export let getData2 = async (start_point) => {
   let all = ``
   const docRef = doc(db, "Trip-info", start_point);
@@ -62,47 +85,33 @@ export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") =>
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    let i = 1;
+    let i = 0;
     docSnap.data()['end'].forEach((end_point) => {
-      if(localStorage.getItem('kog') == false){
+      if(localStorage.getItem('log') == 'false'){
         all += `<div class="popu_box">
         <img src="${end_point['vehicle-image']}" alt="" class="popu_image">
         <div class="popu_info">
-          <p class="popu-label">Điểm đi: ${start_point}</p>
-          <p class="popu-label">Điểm đến: ${end_point.name}</p>
-          <p class="popu-label">Giá tiền: ${end_point.price}</p>
-          <p class="popu-label">Thời gian di chuyển: ${end_point.time}</p>
+          <p class="popu-label dep">Điểm đi: ${start_point}</p>
+          <p class="popu-label arr">Điểm đến: ${end_point.name}</p>
+          <p class="popu-label pri">Giá tiền: ${end_point.price}</p>
+          <p class="popu-label time">Thời gian di chuyển: ${end_point.time}</p>
         </div>
       </div>`
       }
-      else{
+      else {
         i += 1;
         all += `<div class="popu_box">
           <img src="${end_point['vehicle-image']}" alt="" class="popu_image">
           <div class="popu_info">
-            <p class="popu-label">Điểm đi: ${start_point}</p>
-            <p class="popu-label">Điểm đến: ${end_point.name}</p>
-            <p class="popu-label">Giá tiền: ${end_point.price}</p>
-            <p class="popu-label">Thời gian di chuyển: ${end_point.time}</p>
+            <p class="popu-label dep">Điểm đi: ${start_point}</p>
+            <p class="popu-label arr">Điểm đến: ${end_point.name}</p>
+            <p class="popu-label pri">Giá tiền: ${end_point.price}</p>
+            <p class="popu-label time">Thời gian di chuyển: ${end_point.time}</p>
           </div>
-          <button id="btn_${i}">Đặt xe</button>
+          <button id="btn_${i}" class="btn btn-info" type="button">Đặt xe</button>
         </div>`;
     }
     });
-    const parentElement  = document.querySelector("#E_popular");
-    // parentElement.addEventListener("click", (event) => {
-    //   // Check if the clicked element is a button
-    //   if (event.target.tagName === "BUTTON") {
-    //     // Get the closest div element relative to the clicked button
-    //     const divElement = event.target.closest("div");
-        
-    //     // Check if a div element was found
-    //     if (divElement) {
-    //       // ... do something with the div element
-    //       console.log(divElement);
-    //     }
-    //   }
-    // });
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
@@ -116,20 +125,20 @@ export async function signUp(email, password) {
     const userCredential = await createUserWithEmailAndPassword(auth,email, password);
     const user = userCredential.user;
     console.log("User signed up successfully:", user.uid);
+    localStorage.setItem("gmail", email);
     // Additional actions after successful sign up
   } catch (error) {
     console.error("Sign up failed:", error.message);
   }
 }
 
-localStorage.setItem("log",false)
 export let Log_out = () => {
   signOut(auth).then(() => {
     console.log("Sign Out success");
     document.querySelector("#navRight").innerHTML = `
       <button id="B_signInUp" class="navText">Đăng kí / Đăng Nhập</button>
       <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
-      localStorage.setItem("log",false)
+      localStorage.setItem("log",'false')
     render_sign()
   }).catch((error) => {
     console.log("Sign Out failed", error.message);
@@ -143,12 +152,14 @@ export async function signIn(email, password) {
     document.querySelector("#navRight").innerHTML = `        
       <img scr="./blank_logo.png" alt="user">
       <div class="text-box">
-        <button title="Log_out" id="logOut">Log Out</button>
+        <button title="Log_out" id="logOut" type="button" class="btn btn-danger">Log Out</button>
       </div>
       <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
-      localStorage.setItem("log",true)
-    document.querySelector("logOut").addEventListener("click", () => {
-      signOut()
+      localStorage.setItem("log",'true')
+      render_home()
+    document.querySelector("#logOut").addEventListener("click", () => {
+      Log_out()
+      localStorage.setItem('log','false')
       document.querySelector("#navRight").innerHTML =  `
         <button id="B_signInUp" class="navText">Đăng kí / Đăng Nhập</button>
         <button id="B_aboutUs" class="navText">Về chúng tôi</button>
@@ -179,16 +190,31 @@ export let fetchData = async (a, b) => {
   }
   console.log(result);
   let retu =  ``
+  let i = 0;
   result.forEach((item) => {
-    retu += `<div class="popu_box">
-    <img src="${item['vehicle-image']}" alt="" class="popu_image">
-    <div class="popu_info">
-    <p class="popu-label">Điểm đi: ${a}</p>
-    <p class="popu-label">Điểm đến: ${item.name}</p>
-    <p class="popu-label">Giá tiền: ${item.price}</p>
-    <p class="popu-label">Thời gian di chuyển: ${item.time}</p>
-    </div>
-    </div>`;
+    i += 1
+    if(localStorage.getItem("log") == 'false'){
+      retu += `<div class="popu_box">
+      <img src="${item['vehicle-image']}" alt="" class="popu_image">
+      <div class="popu_info">
+      <p class="popu-label dep">Điểm đi: ${a}</p>
+      <p class="popu-label arr">Điểm đến: ${item.name}</p>
+      <p class="popu-label pri">Giá tiền: ${item.price}</p>
+      <p class="popu-label time">Thời gian di chuyển: ${item.time}</p>
+      </div>
+      </div>`}
+    else{
+      retu += `<div class="popu_box">
+      <img src="${item['vehicle-image']}" alt="" class="popu_image">
+      <div class="popu_info">
+        <p class="popu-label dep">Điểm đi: ${a}</p>
+        <p class="popu-label arr">Điểm đến: ${item.name}</p>
+        <p class="popu-label pri">Giá tiền: ${item.price}</p>
+        <p class="popu-label time">Thời gian di chuyển: ${item.time}</p>
+        <button id="btn_${i}" class="btn btn-info" type="button">Đặt xe</button>
+      </div>
+      </div>`;
+    }
   })
   return retu;
 };
