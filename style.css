@@ -22,6 +22,7 @@ body {
 #carousel {
   position: relative;
   opacity: 50%;
+  z-index: 1;
 }
 .overlay {
   position: absolute;
@@ -87,8 +88,9 @@ body {
 }
 #navRight {
   position: relative;
-  display: inline-block;
+  display: flex;
   margin-right: 30px;
+  justify-content: space-around;
 }
 #navLeft {
   margin-left: 30px;
@@ -106,17 +108,25 @@ body {
 }
 .text-box {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: -100px;
+  left: 20px; /* Adjust the value as needed */
+  transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
   padding: 10px;
-  opacity: 0;
+  display: none;
   transition: opacity 0.3s ease-in-out;
+  z-index: 2;
 }
+
+.btn {
+  z-index: 3;
+  margin-top: 5px;
+}
+
 #navRight:hover .text-box {
   opacity: 1;
+  display: block;
 }
 .label {
   color: #702929;
@@ -167,6 +177,8 @@ body {
 }
 .popu-info {
   margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
 }
 #E_footer {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)), url(./footer.png);

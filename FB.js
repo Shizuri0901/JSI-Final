@@ -39,28 +39,26 @@ export let getData = async () => {
   return all
 }
 
-export let setData = async (gmail,uname,dep,arr,pri) => {
+export let setData = async (gmail,dep,arr,pri,vehicle_image) => {
   let prev = []
   const docRef = doc(db, "user", gmail);
   const docSnap = await getDoc(docRef);
+  prev.push({
+    departure: dep,
+    arrival: arr,
+    price: pri
+  })
   if (docSnap.exists()) {
     docSnap.data()['history'].forEach((item) => {
       prev.push(item)
     })
   } else {
     // docSnap.data() will be undefined in this case
-    console.log("No such document!");
+    await setDoc(doc(db, "user", gmail), {
+      history: prev
+    })};
   }
-  prev.push({
-    name: uname,
-    departure: dep,
-    arrival: arr,
-    price: pri
-  });
-  
-  await setDoc(doc(db, "user", gmail), {
-    history: prev
-  })};
+;
 
 export let getData2 = async (start_point) => {
   let all = ``
@@ -95,6 +93,7 @@ export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") =>
           <p class="popu-label arr">Điểm đến: ${end_point.name}</p>
           <p class="popu-label pri">Giá tiền: ${end_point.price}</p>
           <p class="popu-label time">Thời gian di chuyển: ${end_point.time}</p>
+          <p class="popu-label start">Thời gian bắt đầu và kết thúc: ${end_point.start_end}</p>
         </div>
       </div>`
       }
@@ -107,16 +106,16 @@ export let getPopularTrip = async (start_point="Thành phố Hồ Chí Minh") =>
             <p class="popu-label arr">Điểm đến: ${end_point.name}</p>
             <p class="popu-label pri">Giá tiền: ${end_point.price}</p>
             <p class="popu-label time">Thời gian di chuyển: ${end_point.time}</p>
+            <p class="popu-label start">Thời gian bắt đầu và kết thúc: ${end_point.start_end}</p>
           </div>
           <button id="btn_${i}" class="btn btn-info" type="button">Đặt xe</button>
-        </div>`;
+        </div>`;   
     }
     });
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
-
   return all;
 };
 
@@ -152,11 +151,16 @@ export async function signIn(email, password) {
     document.querySelector("#navRight").innerHTML = `        
       <img scr="./blank_logo.png" alt="user">
       <div class="text-box">
-        <button title="Log_out" id="logOut" type="button" class="btn btn-danger">Log Out</button>
+        <button title="Log_out" id="logOut" type="button" class="btn btn-danger">Đăng xuất</button>
+        <button title="history" id="history" type="button" class="btn btn-success">Lịch sử đặt xe</button>
       </div>
       <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
       localStorage.setItem("log",'true')
+      localStorage.setItem("gmail",email)
       render_home()
+    document.querySelector("#history").addEventListener("click",() => {
+      render_history(email)
+    })
     document.querySelector("#logOut").addEventListener("click", () => {
       Log_out()
       localStorage.setItem('log','false')
@@ -201,6 +205,7 @@ export let fetchData = async (a, b) => {
       <p class="popu-label arr">Điểm đến: ${item.name}</p>
       <p class="popu-label pri">Giá tiền: ${item.price}</p>
       <p class="popu-label time">Thời gian di chuyển: ${item.time}</p>
+      <p class="popu-label start">Thời gian bắt đầu và kết thúc: ${item.start_end}</p>
       </div>
       </div>`}
     else{
@@ -211,6 +216,7 @@ export let fetchData = async (a, b) => {
         <p class="popu-label arr">Điểm đến: ${item.name}</p>
         <p class="popu-label pri">Giá tiền: ${item.price}</p>
         <p class="popu-label time">Thời gian di chuyển: ${item.time}</p>
+        <p class="popu-label start">Thời gian bắt đầu và kết thúc: ${item.start_end}</p>
         <button id="btn_${i}" class="btn btn-info" type="button">Đặt xe</button>
       </div>
       </div>`;
@@ -218,3 +224,38 @@ export let fetchData = async (a, b) => {
   })
   return retu;
 };
+export let render_history = async (email) => {
+  let all = `<h2 class="title">Lịch sử đặt xe</h2>`
+  const querySnapshot = await getDocs(collection(db, "user"));
+  querySnapshot.forEach(async (doc) => {
+    if(doc.id == email){
+      const userHis = doc(db, "user", doc);
+      const docSnap = await getDoc(userHis);
+      if (docSnap.exists()) {
+        const endArray = docSnap.data().end || [];
+        console.log(endArray);
+        endArray.forEach((item) => {
+          all +=`<div class="popu_box">
+          <img src="${item['vehicle-image']}" alt="" class="popu_image">
+          <div class="popu_info">
+            <div id="important">
+            <p class="popu-label dep">Điểm đi: ${item.dep}</p>
+            <p class="popu-label arr">Điểm đến: ${item.arr}</p>
+            <p class="popu-label pass">Hành Khách: ${item.pass}</p>
+          </div>
+          <div id="addition">
+            <p class="popu-label pri">Giá tiền: ${item.pri}</p>
+            <p class="popu-label time">Thời gian di chuyển: ${item.time}</p>
+            <p class="popu-label start">Thời gian bắt đầu và kết thúc: ${item.start_end}</p>
+          </div>
+          </div>
+        </div>`
+        });
+      }
+      else{
+        console.log("No such account!");
+      }
+    }
+  });
+  document.querySelector("#content").innerHTML = all
+}

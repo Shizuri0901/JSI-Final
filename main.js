@@ -7,7 +7,7 @@ if(localStorage.getItem('log') == undefined){
 export let render_home = async () => {
   document.querySelector("#content").innerHTML = `
     <div id="E_bookingAndCarousel">
-      <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+      <div id="carousel" class="carousel slide" data-bs-ride="true">
           <div class="carousel-inner">
           <div class="carousel-item active">
               <img src="carousel_1.png" class="d-block w-100" alt="...">
@@ -128,11 +128,10 @@ let set_btnbooking = () => {
       if (divElement) {
         // ... do something with the div element
         let gm = localStorage.getItem("gmail")
-        let usern = divElement.querySelector(".name").textContent;
         let dep = divElement.querySelector(".dep").textContent;
         let arr = divElement.querySelector(".arr").textContent;
         let pri = divElement.querySelector(".pri").textContent;
-        setData(gm,usern,dep,arr,pri)
+        setData(gm,dep,arr,pri)
         console.log(divElement);
       }
     }
