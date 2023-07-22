@@ -22,6 +22,7 @@ body {
 #carousel {
   position: relative;
   opacity: 50%;
+  z-index: 1;
 }
 .overlay {
   position: absolute;
@@ -86,12 +87,18 @@ body {
   height: 400px
 }
 #navRight {
-  position: relative;
-  display: inline-block;
-  margin-right: 30px;
+  display: flex;
+  align-items: center;
 }
 #navLeft {
   margin-left: 30px;
+}
+#us {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  /* Other styling for the image */
 }
 .box {
   border-radius: 180px;
@@ -105,18 +112,23 @@ body {
   flex-shrink: 0;
 }
 .text-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 10px;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  gap: 10px;
 }
-#navRight:hover .text-box {
-  opacity: 1;
+
+.nav-b {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#navRight:hover .text-box button,
+#navRight:hover #B_aboutUs {
+  display: block;
+}
+.text-box button,
+#B_aboutUs {
+  display: none;
 }
 .label {
   color: #702929;
@@ -147,6 +159,7 @@ body {
 #E_popular {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center; 
   margin-top: 30px;
 }
@@ -167,6 +180,8 @@ body {
 }
 .popu-info {
   margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
 }
 #E_footer {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)), url(./footer.png);
@@ -245,6 +260,12 @@ body {
 #B_confirm {
   margin-top: 10px;
   margin-left: 175px;
+}
+#B_aboutUs {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .Inp {
   border-radius: 20px;

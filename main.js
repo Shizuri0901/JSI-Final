@@ -1,10 +1,11 @@
 /// Other constiable
-import { getData, getData2, getPopularTrip, signIn, signUp, fetchData} from "./FB";
+import { getData, getData2, getPopularTrip, signIn, signUp, fetchData, setData} from "./FB";
 localStorage.setItem('page', "home");
-let render_home = async () => {
+localStorage.setItem('log','false')
+export let render_home = async () => {
   document.querySelector("#content").innerHTML = `
     <div id="E_bookingAndCarousel">
-      <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+      <div id="carousel" class="carousel slide" data-bs-ride="true">
           <div class="carousel-inner">
           <div class="carousel-item active">
               <img src="carousel_1.png" class="d-block w-100" alt="...">
@@ -52,6 +53,7 @@ let render_home = async () => {
       ${await getPopularTrip()}
     </div>
   `;
+  set_btnbooking()
   localStorage.setItem('page', "home");
   /// Setup dropdown
   // Get dropdown toggle buttons and dropdown menus
@@ -111,9 +113,32 @@ let render_home = async () => {
     document.querySelector("#img_sreach").addEventListener('click',async () => {
       const result = await fetchData(document.querySelector("#dropdown-toggle-1").textContent, document.querySelector("#dropdown-toggle-2").textContent);
       document.querySelector("#E_popular").innerHTML = result;
+      set_btnbooking()
     })
 }
-let render_sign = async () => {
+let set_btnbooking = () => {
+  const parentElement  = document.querySelector("#E_popular");
+  parentElement.addEventListener("click", (event) => {
+    if (event.target.tagName === "BUTTON") {
+      // Get the closest div element relative to the clicked button
+      const divElement = event.target.closest("div");
+      console.log(divElement);
+      // Check if a div element was found
+      if (divElement) {
+        // ... do something with the div element
+        let img = divElement.querySelector(".popu_image").src.split('/').pop()
+        let gm = localStorage.getItem("gmail")
+        let dep = divElement.querySelector(".dep").textContent;
+        let arr = divElement.querySelector(".arr").textContent;
+        let pri = divElement.querySelector(".pri").textContent;
+        let time = divElement.querySelector(".time").textContent;
+        let st_en = divElement.querySelector(".start").textContent;
+        setData(gm,dep,arr,pri,img,time,st_en)
+      }
+    }
+  });
+};
+export let render_sign = async () => {
   document.querySelector("#content").innerHTML = `
   <div id="E_signIn">
       <div id="Option">
@@ -122,14 +147,14 @@ let render_sign = async () => {
       </div>
       <div id="Input">
         <p class="popu-label indi">Email</p>
-        <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email">
+        <input type="text" title="Email" id="Inp-email" class="Inp" placeholder="Email thật">
         <p class="popu-label indi">Số điện thoại</p>
         <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
         <p class="popu-label indi">Mật khẩu</p>
-        <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+        <input type="password" title="pass" id="Inp-password" class="Inp" placeholder="Password">
         <p class="popu-label indi">Xác nhận mật khẩu</p>
-        <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
-        <button title="conf" class="B_search" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>
+        <input type="password" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
+        <button title="conf" class="B_search btn btn-success" type="button" id="B_confirm" onclick="confirm">Xác nhận</button>
       </div>
     </div>`;
     document.querySelector("#B_confirm").addEventListener("click",()=>{
@@ -138,6 +163,9 @@ let render_sign = async () => {
       let email = document.querySelector("#Inp-email").value;
       if (passconf == pass){
         signUp(email,pass);
+      }
+      else {
+        alert("Thông tin bị lỗi vui lòng kiểm tra email và mật khẩu")
       }
     })
     localStorage.setItem('page', "Sign");
@@ -149,9 +177,9 @@ let render_sign = async () => {
     <p class="popu-label indi">Số điện thoại</p>
     <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
     <p class="popu-label indi">Mật khẩu</p>
-    <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+    <input type="password" title="pass" id="Inp-password" class="Inp" placeholder="Password">
     <span id="error"></span>
-    <button title="conf" class="B_search" type="button" id="B_confirm">Xác nhận</button>`
+    <button title="conf" class="B_search btn btn-success" type="button" id="B_confirm">Xác nhận</button>`
     document.querySelector("#InOption").style.color ="#702929";
     document.querySelector("#UpOption").style.color = "#008080";
     document.querySelector("#B_confirm").addEventListener("click",()=>{
@@ -168,11 +196,11 @@ let render_sign = async () => {
       <p class="popu-label indi">Số điện thoại</p>
       <input type="text" title="phoneNum" id="Inp-phoneNum" class="Inp" placeholder="Số điện thoại">
       <p class="popu-label indi">Mật khẩu</p>
-      <input type="text" title="pass" id="Inp-password" class="Inp" placeholder="Password">
+      <input type="password" title="pass" id="Inp-password" class="Inp" placeholder="Password">
       <p class="popu-label indi">Xác nhận mật khẩu</p>
-      <input type="text" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
+      <input type="password" title="passconf" id="Inp-passwordConf" class="Inp" placeholder="Xác nhận mật khẩu">
       <span id="error"></span>
-      <button title="conf" class="B_search" type="button" id="B_confirm">Xác nhận</button>`
+      <button title="conf" class="B_search btn btn-success" type="button" id="B_confirm">Xác nhận</button>`
       document.querySelector("#UpOption").style.color ="#702929";
       document.querySelector("#InOption").style.color ="#008080";
       document.querySelector("#B_confirm").addEventListener("click",()=>{
@@ -186,7 +214,7 @@ let render_sign = async () => {
     })
 }
 
-let render_about = async () => {
+export let render_about = async () => {
   document.querySelector("#content").innerHTML = `
   <div id="E_aboutUs">
       <div id="info">
