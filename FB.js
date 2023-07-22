@@ -1,5 +1,5 @@
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc, where, query, collectionGroup } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 // Required for side-effects
 import "firebase/firestore";
@@ -7,7 +7,7 @@ import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { render_sign, render_home } from "./main";
+import { render_sign, render_home, render_about } from "./main";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -39,24 +39,28 @@ export let getData = async () => {
   return all
 }
 
-export let setData = async (gmail,dep,arr,pri,vehicle_image) => {
+export let setData = async (gmail,dep,arr,pri,vehicle_image,tm,st_en) => {
   let prev = []
-  const docRef = doc(db, "user", gmail);
-  const docSnap = await getDoc(docRef);
   prev.push({
     departure: dep,
     arrival: arr,
-    price: pri
+    price: pri,
+    time:tm,
+    vehicle_image: vehicle_image,
+    start: st_en
   })
+  const docRef = doc(db, "user", gmail);
+  const docSnap = await getDoc(docRef);
+  console.log(prev);
   if (docSnap.exists()) {
     docSnap.data()['history'].forEach((item) => {
       prev.push(item)
+      console.log(prev);
     })
-  } else {
-    // docSnap.data() will be undefined in this case
-    await setDoc(doc(db, "user", gmail), {
-      history: prev
-    })};
+  } 
+  await setDoc(doc(db, "user", gmail), {
+    history: prev
+  });
   }
 ;
 
@@ -149,17 +153,20 @@ export async function signIn(email, password) {
     const user = userCredential.user;
     console.log("User signed in successfully:", user.uid);
     document.querySelector("#navRight").innerHTML = `        
-      <img scr="./blank_logo.png" alt="user">
+      <img src="./blank_logo.png" alt="user" id="us">
       <div class="text-box">
-        <button title="Log_out" id="logOut" type="button" class="btn btn-danger">Đăng xuất</button>
-        <button title="history" id="history" type="button" class="btn btn-success">Lịch sử đặt xe</button>
-      </div>
-      <button id="B_aboutUs" class="navText">Về chúng tôi</button>`
+        <button title="Log_out" id="logOut" type="button" class="btn btn-danger nav-b">Đăng xuất</button>
+        <button title="history" id="history" type="button" class="btn btn-success nav-b">Lịch sử đặt xe</button>
+        <button id="B_aboutUs" class="navText">Về chúng tôi</button>
+      </div>`
       localStorage.setItem("log",'true')
       localStorage.setItem("gmail",email)
       render_home()
     document.querySelector("#history").addEventListener("click",() => {
-      render_history(email)
+      find_history(email)
+    })
+    document.querySelector("#B_aboutUs").addEventListener("click", () => {
+      render_about()
     })
     document.querySelector("#logOut").addEventListener("click", () => {
       Log_out()
@@ -182,7 +189,6 @@ export let fetchData = async (a, b) => {
 
   if (docSnap.exists()) {
     const endArray = docSnap.data().end || [];
-    console.log(endArray);
     endArray.forEach((item) => {
       if (item.name === b) {
         result.push(item);
@@ -192,7 +198,6 @@ export let fetchData = async (a, b) => {
   else{
     console.log("No such document!");
   }
-  console.log(result);
   let retu =  ``
   let i = 0;
   result.forEach((item) => {
@@ -217,45 +222,46 @@ export let fetchData = async (a, b) => {
         <p class="popu-label pri">Giá tiền: ${item.price}</p>
         <p class="popu-label time">Thời gian di chuyển: ${item.time}</p>
         <p class="popu-label start">Thời gian bắt đầu và kết thúc: ${item.start_end}</p>
-        <button id="btn_${i}" class="btn btn-info" type="button">Đặt xe</button>
       </div>
+      <button id="btn_${i}" class="btn btn-info" type="button">Đặt xe</button>
       </div>`;
     }
   })
   return retu;
 };
-export let render_history = async (email) => {
-  let all = `<h2 class="title">Lịch sử đặt xe</h2>`
+export let find_history = async (email) => {
   const querySnapshot = await getDocs(collection(db, "user"));
   querySnapshot.forEach(async (doc) => {
     if(doc.id == email){
-      const userHis = doc(db, "user", doc);
-      const docSnap = await getDoc(userHis);
-      if (docSnap.exists()) {
-        const endArray = docSnap.data().end || [];
-        console.log(endArray);
-        endArray.forEach((item) => {
-          all +=`<div class="popu_box">
-          <img src="${item['vehicle-image']}" alt="" class="popu_image">
-          <div class="popu_info">
-            <div id="important">
-            <p class="popu-label dep">Điểm đi: ${item.dep}</p>
-            <p class="popu-label arr">Điểm đến: ${item.arr}</p>
-            <p class="popu-label pass">Hành Khách: ${item.pass}</p>
-          </div>
-          <div id="addition">
-            <p class="popu-label pri">Giá tiền: ${item.pri}</p>
-            <p class="popu-label time">Thời gian di chuyển: ${item.time}</p>
-            <p class="popu-label start">Thời gian bắt đầu và kết thúc: ${item.start_end}</p>
-          </div>
-          </div>
-        </div>`
-        });
-      }
-      else{
-        console.log("No such account!");
-      }
+      render_history(doc.id)
     }
   });
-  document.querySelector("#content").innerHTML = all
 }
+export let render_history = async (gmail) => {
+  let all = `<h2 class="title">Lịch sử đặt xe</h2>`;
+  const userDocRef = doc(db, "user", gmail);
+  const userDocSnap = await getDoc(userDocRef);
+  if (userDocSnap.exists()) {
+    const historyArray = userDocSnap.data().history || [];
+    historyArray.forEach((x) => {
+      all += `<div class="popu_box" style="margin-left: 125px;">
+        <img src="${x.vehicle_image}" alt="" class="popu_image">
+        <div class="popu_info">
+          <div id="important">
+            <p class="popu-label dep">${x.departure}</p>
+            <p class="popu-label arr">${x.arrival}</p>
+          </div>
+          <div id="addition">
+            <p class="popu-label pri">${x.price}</p>
+            <p class="popu-label time">${x.time}</p>
+            <p class="popu-label start">${x.start}</p>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    document.querySelector("#content").innerHTML = all;
+  } else {
+    console.log("No such account or history!");
+  }
+};

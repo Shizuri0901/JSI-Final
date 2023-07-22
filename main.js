@@ -1,9 +1,7 @@
 /// Other constiable
 import { getData, getData2, getPopularTrip, signIn, signUp, fetchData, setData} from "./FB";
 localStorage.setItem('page', "home");
-if(localStorage.getItem('log') == undefined){
-  localStorage.setItem('log','false')
-}
+localStorage.setItem('log','false')
 export let render_home = async () => {
   document.querySelector("#content").innerHTML = `
     <div id="E_bookingAndCarousel">
@@ -124,15 +122,18 @@ let set_btnbooking = () => {
     if (event.target.tagName === "BUTTON") {
       // Get the closest div element relative to the clicked button
       const divElement = event.target.closest("div");
+      console.log(divElement);
       // Check if a div element was found
       if (divElement) {
         // ... do something with the div element
+        let img = divElement.querySelector(".popu_image").src.split('/').pop()
         let gm = localStorage.getItem("gmail")
         let dep = divElement.querySelector(".dep").textContent;
         let arr = divElement.querySelector(".arr").textContent;
         let pri = divElement.querySelector(".pri").textContent;
-        setData(gm,dep,arr,pri)
-        console.log(divElement);
+        let time = divElement.querySelector(".time").textContent;
+        let st_en = divElement.querySelector(".start").textContent;
+        setData(gm,dep,arr,pri,img,time,st_en)
       }
     }
   });
@@ -162,6 +163,9 @@ export let render_sign = async () => {
       let email = document.querySelector("#Inp-email").value;
       if (passconf == pass){
         signUp(email,pass);
+      }
+      else {
+        alert("Thông tin bị lỗi vui lòng kiểm tra email và mật khẩu")
       }
     })
     localStorage.setItem('page', "Sign");
