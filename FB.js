@@ -1,12 +1,12 @@
-import { getFirestore } from "firebase/firestore";
-import { collection, getDocs, doc, getDoc, setDoc, where, query, collectionGroup } from "firebase/firestore";
-import firebase from "firebase/compat/app";
+import { getFirestore } from "./firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc, where, query, collectionGroup } from "./firebase/firestore";
+// import firebase from "firebase/compat/app";
 // Required for side-effects
-import "firebase/firestore";
+import "./firebase/firestore";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "./firebase/auth";
 import { render_sign, render_home, render_about } from "./main";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
